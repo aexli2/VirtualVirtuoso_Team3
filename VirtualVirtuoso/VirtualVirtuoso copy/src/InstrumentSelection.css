@@ -104,6 +104,41 @@
   border: 2px solid black;
 }
 
+
+
+.instrument-image-box-guitar {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectGuitar.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectGuitar.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
+}
+
+.instrument-image-box-drums {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectDrums.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectDrums.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
+}
+
+.instrument-image-box-piano {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectPiano.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectPiano.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
+}
+
 /* hover effect */
 .instrument-option:hover .instrument-image-box {
   background: #e6e6e6;

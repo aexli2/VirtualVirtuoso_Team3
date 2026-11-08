@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+
 import HowToPage from './HowToPage';
 import InstrumentSelection from './InstrumentSelection';
 import './App.css';
@@ -7,27 +8,53 @@ import './App.css';
 function App() {
   const [page, setPage] = useState('home');//keeps track of the current page 
   const [mode, setMode] = useState(null);//keeps track of the current game mode
+  
+  //keeps track of the selected instrument and needs to be passed down to the instrument selection page
+  const [selectedInstrument, setSelectedInstrument] = useState(null);
+ 
+ 
+  //These variables are tracking the score across every instrument
+  const [currentScore, setCurrentScore] = useState(0);//keeps track of the current score for any instrument
+  const [drumHighScore, setDrumHighScore] = useState(0);//keeps track of the high score for drums
+  const [pianoHighScore, setPianoHighScore] = useState(0);//keeps track of the high score for piano
+  const [guitarHighScore, setGuitarHighScore] = useState(0);//keeps track of the high score for guitar
 
-  function startMode(selectedMode) { //open instrument selection page for the selected mode
+  useEffect(() => {
+    console.log('Current page: ' + page + ' | Current mode: ' + mode+' | Instrument: ' + selectedInstrument);
+  }, [page, mode, selectedInstrument]);//logs the current page and mode whenever they change
+
+
+  function startMode(selectedMode) {//open instrument selection page for the selected mode
     setMode(selectedMode);
     setPage('instrument-selection');
+    console.log('Entering mode: ' + selectedMode);
   }
 
   function goHome() {//go home function
-    setPage('home');
+    setPage('home');//Sets the page to home
     setMode(null);
+    setSelectedInstrument(null);
   }
 
   if (page === 'howto') {//to open the how to page
     return <HowToPage onBack={goHome} />;
   }
 
+
+function handleInstrumentSelect(instrument) {//to handle the instrument selection
+    setSelectedInstrument(instrument);
+    console.log('Instrument selected: ' + instrument + ' | mode is currently: ' + mode);
+   
+  }
+
   if (page === 'instrument-selection') {//to open the instrument selection page
     return (
       <InstrumentSelection
         mode={mode}
+        page={page}
+        selectedInstrument={selectedInstrument}
         onBack={goHome}
-        onSelect={() => {}}
+        onSelect={handleInstrumentSelect}
       />
     );
   }
@@ -42,21 +69,28 @@ function App() {
         <div className="menu-buttons">
           <button
             type="button"
-            onClick={() => startMode('freeplay')}//sets the page to the instrument selection for free play mode
+            onClick={() => {
+              startMode('freeplay'); 
+              }}//sets the page to the instrument selection for free play mode
           >
             Free Play
           </button>
-
+          
           <button
             type="button"
-            onClick={() => startMode('challenge')}//sets the page to the instrument selection for challenge mode
+            onClick={() => {
+
+              startMode('challenge'); 
+            }}//sets the page to the instrument selection for challenge mode
           >
             Challenge
           </button>
 
           <button
             type="button"
-            onClick={() => setPage('howto')}//sets the page to the how to page
+            onClick={() => {
+              setPage('howto');
+            }}//sets the page to the how to page
           >
             How-To
           </button>
