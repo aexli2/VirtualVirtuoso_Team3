@@ -9,10 +9,19 @@ function App() {
   const [page, setPage] = useState('home');//keeps track of the current page 
   const [mode, setMode] = useState(null);//keeps track of the current game mode
   
+  //keeps track of the selected instrument and needs to be passed down to the instrument selection page
+  const [selectedInstrument, setSelectedInstrument] = useState(null);
+ 
+ 
+  //These variables are tracking the score across every instrument
+  const [currentScore, setCurrentScore] = useState(0);//keeps track of the current score for any instrument
+  const [drumHighScore, setDrumHighScore] = useState(0);//keeps track of the high score for drums
+  const [pianoHighScore, setPianoHighScore] = useState(0);//keeps track of the high score for piano
+  const [guitarHighScore, setGuitarHighScore] = useState(0);//keeps track of the high score for guitar
 
   useEffect(() => {
-    console.log('Current page: ' + page + ' | Current mode: ' + mode);
-  }, [page, mode]);//logs the current page and mode whenever they change
+    console.log('Current page: ' + page + ' | Current mode: ' + mode+' | Instrument: ' + selectedInstrument);
+  }, [page, mode, selectedInstrument]);//logs the current page and mode whenever they change
 
 
   function startMode(selectedMode) {//open instrument selection page for the selected mode
@@ -24,18 +33,28 @@ function App() {
   function goHome() {//go home function
     setPage('home');//Sets the page to home
     setMode(null);
+    setSelectedInstrument(null);
   }
 
   if (page === 'howto') {//to open the how to page
     return <HowToPage onBack={goHome} />;
   }
 
+
+function handleInstrumentSelect(instrument) {//to handle the instrument selection
+    setSelectedInstrument(instrument);
+    console.log('Instrument selected: ' + instrument + ' | mode is currently: ' + mode);
+   
+  }
+
   if (page === 'instrument-selection') {//to open the instrument selection page
     return (
       <InstrumentSelection
         mode={mode}
+        page={page}
+        selectedInstrument={selectedInstrument}
         onBack={goHome}
-        onSelect={() => {}}
+        onSelect={handleInstrumentSelect}
       />
     );
   }
