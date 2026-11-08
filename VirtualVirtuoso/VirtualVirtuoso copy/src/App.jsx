@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+
 import HowToPage from './HowToPage';
 import InstrumentSelection from './InstrumentSelection';
 import './App.css';
@@ -7,14 +8,21 @@ import './App.css';
 function App() {
   const [page, setPage] = useState('home');//keeps track of the current page 
   const [mode, setMode] = useState(null);//keeps track of the current game mode
+  
 
-  function startMode(selectedMode) { //open instrument selection page for the selected mode
+  useEffect(() => {
+    console.log('Current page: ' + page + ' | Current mode: ' + mode);
+  }, [page, mode]);//logs the current page and mode whenever they change
+
+
+  function startMode(selectedMode) {//open instrument selection page for the selected mode
     setMode(selectedMode);
     setPage('instrument-selection');
+    console.log('Entering mode: ' + selectedMode);
   }
 
   function goHome() {//go home function
-    setPage('home');
+    setPage('home');//Sets the page to home
     setMode(null);
   }
 
@@ -42,21 +50,28 @@ function App() {
         <div className="menu-buttons">
           <button
             type="button"
-            onClick={() => startMode('freeplay')}//sets the page to the instrument selection for free play mode
+            onClick={() => {
+              startMode('freeplay'); 
+              }}//sets the page to the instrument selection for free play mode
           >
             Free Play
           </button>
-
+          
           <button
             type="button"
-            onClick={() => startMode('challenge')}//sets the page to the instrument selection for challenge mode
+            onClick={() => {
+
+              startMode('challenge'); 
+            }}//sets the page to the instrument selection for challenge mode
           >
             Challenge
           </button>
 
           <button
             type="button"
-            onClick={() => setPage('howto')}//sets the page to the how to page
+            onClick={() => {
+              setPage('howto');
+            }}//sets the page to the how to page
           >
             How-To
           </button>
