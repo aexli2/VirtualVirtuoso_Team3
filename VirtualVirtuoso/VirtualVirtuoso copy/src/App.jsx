@@ -4,6 +4,10 @@ import { useState,useEffect } from 'react';
 import HowToPage from './HowToPage';
 import InstrumentSelection from './InstrumentSelection';
 import './App.css';
+import Drums from './Drums';
+import Piano from './Piano';
+import Guitar from './Guitar';
+import LevelSelection from './LevelSelection';
 
 function App() {
   const [page, setPage] = useState('home');//keeps track of the current page 
@@ -44,6 +48,14 @@ function App() {
 function handleInstrumentSelect(instrument) {//to handle the instrument selection
     setSelectedInstrument(instrument);
     console.log('Instrument selected: ' + instrument + ' | mode is currently: ' + mode);
+
+    if (mode === 'challenge') {
+      setPage('level-selection');
+    }
+    if (mode === 'freeplay') {
+      setPage(instrument);//This will set the page into the selected instrument page
+    }
+
    
   }
 
@@ -56,6 +68,30 @@ function handleInstrumentSelect(instrument) {//to handle the instrument selectio
         onBack={goHome}
         onSelect={handleInstrumentSelect}
       />
+    );
+  }
+
+  if (page === 'level-selection') {//to open the level selection page
+    return (
+      <LevelSelection mode={mode} instrument={selectedInstrument} onBack={() => setPage('instrument-selection')} />
+    );
+  }
+
+  if (page === 'drums') {//to open the drums page
+    return (
+      <Drums mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() => setPage('instrument-selection')} />
+    );
+  }
+
+  if (page === 'piano') {//to open the piano page
+    return (
+      <Piano mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() => setPage('instrument-selection')} />
+    );
+  }
+
+  if (page === 'guitar') {//to open the guitar page
+    return (
+      <Guitar mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() => setPage('instrument-selection')} />
     );
   }
 

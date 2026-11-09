@@ -2,7 +2,7 @@
 import './InstrumentSelection.css';
 import { useState,useEffect } from 'react';
 
-import LevelSelection from './LevelSelection';
+
 
 
 
@@ -11,16 +11,6 @@ function InstrumentSelection({ mode, selectedInstrument, onBack, onSelect }) {
 
   const [page,setPage] = useState(false);
 
-if (page === 'level-selection') {
-  return (
-    <LevelSelection
-      mode={mode}
-      instrument={selectedInstrument}
-      onBack={onBack}
-      onSelect={onSelect}
-    />
-  );
-}
 
 
   return (
@@ -46,7 +36,7 @@ if (page === 'level-selection') {
             className="instrument-option"
             type="button"
             onClick={() => {
-              onSelect('drums');
+              onSelect('drums');//Updated the App.jsx handleInstrumentSelect function with drums being the instrument
 
             }}
           >
@@ -58,7 +48,7 @@ if (page === 'level-selection') {
             className="instrument-option"
             type="button"
             onClick={() => {
-              onSelect('piano');
+              onSelect('piano');//Updated the App.jsx handleInstrumentSelect function with piano being the instrument
             }}
           >
             <span className="instrument-name">Piano</span>
@@ -69,10 +59,8 @@ if (page === 'level-selection') {
             className="instrument-option"
             type="button"
             onClick={() => {
-              onSelect('guitar');
-              if (mode === 'challenge') {
-                console.log('Challenge mode selected with Guitar');
-                setPage('level-selection');}
+              onSelect('guitar');//Updated the App.jsx handleInstrumentSelect function with guitar being the instrument
+             
 
             }}
           >
