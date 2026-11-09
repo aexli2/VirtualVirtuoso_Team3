@@ -4,12 +4,6 @@ import { useState, useEffect } from 'react';
 
 function LevelSelection({ mode, instrument, onBack, onSelect}) {
  
- 
- 
- 
- 
- 
- 
   useEffect(() => {
     console.log('LevelSelection page loaded with mode: ' + mode + ' and instrument: ' + instrument);
   
