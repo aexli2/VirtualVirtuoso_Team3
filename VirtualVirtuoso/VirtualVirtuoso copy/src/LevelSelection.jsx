@@ -12,8 +12,8 @@ function LevelSelection({ mode, instrument, onBack, onSelect}) {
   
     return (
 
-    <div className="app">
-      <header className="header">
+    <div className="selection-page">
+      <header className="selection-header">
         <h1>VirtualVirtuoso</h1>
       </header>
       </div>
