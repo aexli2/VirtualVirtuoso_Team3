@@ -1,0 +1,68 @@
+.PianoContainer {
+    position: fixed;
+    bottom: 3vh; /* Scales distance from bottom based on screen height */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh; 
+    z-index: 10;
+    width: 100%;
+    max-width: 600px; /* Prevents it from getting too huge on large screens */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.PianoPicture {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Keeps the container perfectly square and proportional */
+    max-height: 45vh; /* Ensures it never takes up more than 45% of the screen height */
+    background-image: url('./assets/Piano.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* home button */
+.selection-back {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: black;
+  font-family: 'Courier New', monospace;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.Piano-header {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.vbox {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
+}
+
+/* home arrow */
+.selection-arrow {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.selection-back:hover {
+  opacity: 0.7;
+}   
