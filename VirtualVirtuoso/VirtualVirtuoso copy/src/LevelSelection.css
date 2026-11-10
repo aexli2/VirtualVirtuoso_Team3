@@ -54,8 +54,44 @@
 }
 
 /* page content */
-.selection-content {
-  padding: 30px 35px;
+.level-content {
+padding: 140px 20px 20px; 
+  display: flex;
+  font-size: 30px;
+  font-family: 'Cascadia Code', monospace;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px; /* Adds clean spacing between the title and the buttons */
+}
+
+/* Container for level buttons */
+.level-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between level 1 and level 2 buttons */
+  width: 20%;
+  max-width: 400px;
+}
+
+/* Individual level buttons */
+.level-button {
+  padding: 20px;
+  font-size: 24px;
+  font-family: 'Cascadia Code', monospace;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.vbox {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
 }
 
 /* select instrument  */

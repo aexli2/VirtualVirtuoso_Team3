@@ -28,8 +28,8 @@ function App() {
   //useState(int) where the int is the level number, 0 = easy, 1 = medium, 2 = hard, 3 = expert
 
   useEffect(() => {
-    console.log('Current page: ' + page + ' | Current mode: ' + mode+' | Instrument: ' + selectedInstrument);
-  }, [page, mode, selectedInstrument]);//logs the current page and mode whenever they change
+    console.log('Current page: ' + page + ' | Current mode: ' + mode+' | Instrument: ' + selectedInstrument+' | Level: ' + level);
+  }, [page, mode, selectedInstrument, level]);//logs the current page and mode whenever they change
 
 
   function startMode(selectedMode) {//open instrument selection page for the selected mode
@@ -41,6 +41,7 @@ function App() {
   function goHome() {//go home function
     setPage('home');//Sets the page to home
     setMode(null);
+    setLevel(0);
     setSelectedInstrument(null);
   }
 
@@ -65,6 +66,13 @@ function handleInstrumentSelect(instrument) {//to handle the instrument selectio
    
   }
 
+
+function handleLevelSelect(level) {//This handles level selection for the level seleciton page
+    setLevel(level);
+    console.log('Level selected: ' + level + ' | mode is currently: ' + mode + ' | instrument is currently: ' + selectedInstrument);
+    setPage(selectedInstrument);//This will set the page into the selected instrument page
+}
+
   if (page === 'instrument-selection') {//to open the instrument selection page
 
     return (
@@ -80,25 +88,25 @@ function handleInstrumentSelect(instrument) {//to handle the instrument selectio
 
   if (page === 'level-selection') {//to open the level selection page
     return (
-      <LevelSelection mode={mode} instrument={selectedInstrument} onBack={() =>{ setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <LevelSelection mode={mode} level={level} instrument={selectedInstrument} onBack={() =>{ setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} onSelect={handleLevelSelect} />
     );
   }
 
   if (page === 'drums') {//to open the drums page
     return (
-      <Drums mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{ setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <Drums mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
     );
   }
 
   if (page === 'piano') {//to open the piano page
     return (
-      <Piano mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{ setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <Piano mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
     );
   }
 
   if (page === 'guitar') {//to open the guitar page
     return (
-      <Guitar mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{ setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <Guitar mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
     );
   }
 
