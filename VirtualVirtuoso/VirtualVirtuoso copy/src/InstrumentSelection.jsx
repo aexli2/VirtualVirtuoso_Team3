@@ -64,7 +64,7 @@ function InstrumentSelection({ mode, selectedInstrument, onBack, onSelect }) {
 
             }}
           >
-            <span className="instrument-name">Guitar</span>
+            <span className="instrument-name">Bass</span>
             <span className="instrument-image-box-guitar"></span>
           </button>
         </div>
