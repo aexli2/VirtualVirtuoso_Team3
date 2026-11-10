@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+/* importing dancing style font form google fonts */
+/* main container */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  color: black;
+}
+
+/* green header */
+.header {
+  height: 100px;
+  margin: 0;
+  background: #4fa836;
+  border-bottom: 1px solid #2f6b22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* font for the VirtualVirtuoso website title */
+.header h1 {
+  margin: 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+/* area with the buttons */
+.home-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+/* button container */
+.menu-buttons {
+  width: 350px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* button styling */
+.menu-buttons button {
+  background: white;
+  color: black;
+  border: 1px solid #333;
+  border-radius: 13px;
+  padding: 10px 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 40px;
+  cursor: pointer;
+  box-shadow: 8px 8px 0 #666;
+}
+
+/* hover effect */
+.menu-buttons button:hover {
+  background: #f1f1f1;
+}
+
+/* click effect */
+.menu-buttons button:active {
+  transform: translate(8px, 8px);
+  box-shadow: none;
+}
