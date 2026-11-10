@@ -42,7 +42,20 @@
   cursor: pointer;
 }
 
+.drum-header {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
+.vbox {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
+}
 
 /* home arrow */
 .selection-arrow {
