@@ -119,6 +119,19 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
         <div className="DrumsContainer">
             <div className="DrumsPicture"></div>
         </div>
+    {/* Instructions for how to play to the left of the instrument */}
+        <div style={{ position: 'absolute', top: '50%', left: '5%', transform: 'translateY(-50%)', color: 'black', fontSize: '1.2rem', textAlign: 'left' }}>
+
+            <p>Press the following keys to play the Drums:</p>
+            <p>Space - Plays Kick</p>
+            <p>A - Plays Closed Hi-Hat</p>
+            <p>S - Plays Snare</p>
+            <p>E - Plays Crash</p>
+            <p>F - Plays High Tom</p>
+            <p>J - Plays Mid Tom</p>
+            <p>L - Plays Floor Tom</p>
+            <p>I - Plays Ride</p>
+        </div>
         </>
 
     )}

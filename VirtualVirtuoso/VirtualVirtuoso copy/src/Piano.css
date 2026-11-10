@@ -1,3 +1,17 @@
+CSS
+.PageBackground{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./assets/EmptyStagePhoto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
 .PianoContainer {
     position: fixed;
     bottom: 3vh; /* Scales distance from bottom based on screen height */
