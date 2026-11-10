@@ -1,72 +1,146 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
-/* importing dancing style font form google fonts */
-/* main container */
-.app {
+/* main selection page */
+.selection-page {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background: white;
   color: black;
+  font-family: 'Courier New', monospace;
 }
 
 /* green header */
-.header {
+.selection-header {
   height: 100px;
-  margin: 0;
   background: #4fa836;
   border-bottom: 1px solid #2f6b22;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-/* font for the VirtualVirtuoso website title */
-.header h1 {
+/* web title */
+.selection-header h1 {
   margin: 0;
   font-family: 'Dancing Script', cursive;
   font-size: 34px;
   font-weight: 600;
 }
 
-/* area with the buttons */
-.home-content {
-  flex: 1;
+/* home button */
+.selection-back {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 30px;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: black;
+  font-family: 'Courier New', monospace;
+  font-size: 26px;
+  cursor: pointer;
 }
 
-/* button container */
-.menu-buttons {
-  width: 350px;
-  max-width: 100%;
+/* home arrow */
+.selection-arrow {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.selection-back:hover {
+  opacity: 0.7;
+}
+
+/* page content */
+.selection-content {
+  padding: 30px 35px;
+}
+
+/* select instrument  */
+.selection-content h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* three instrument choices */
+.instrument-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 35px;
+  max-width: 1200px;
+  margin: 120px auto 0;
+}
+
+/* clickable instrument */
+.instrument-option {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  align-items: center;
+  gap: 15px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: black;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
 }
 
-/* button styling */
-.menu-buttons button {
-  background: white;
-  color: black;
-  border: 1px solid #333;
-  border-radius: 13px;
-  padding: 10px 20px;
-  font-family: 'Courier New', monospace;
-  font-size: 40px;
-  cursor: pointer;
-  box-shadow: 8px 8px 0 #666;
+/* instrument names */
+.instrument-name {
+  font-size: 32px;
+}
+
+/* image placeholders */
+.instrument-image-box {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  background: #f5f5f5;
+  border: 2px solid black;
+}
+
+
+
+.instrument-image-box-guitar {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectGuitar.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectGuitar.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
+}
+
+.instrument-image-box-drums {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectDrums.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectDrums.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
+}
+
+.instrument-image-box-piano {
+  display: block;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1.24;
+  /* assets/SelectPiano.png is background and needs to be resized to fit the box */
+  background: url('assets/SelectPiano.png') no-repeat center;
+  background-size: contain;/*Resizes the image to fit in the box properly*/
+  border: 2px solid black;
 }
 
 /* hover effect */
-.menu-buttons button:hover {
-  background: #f1f1f1;
-}
-
-/* click effect */
-.menu-buttons button:active {
-  transform: translate(8px, 8px);
-  box-shadow: none;
+.instrument-option:hover .instrument-image-box {
+  background: #e6e6e6;
+  border-color: #4fa836;
 }
