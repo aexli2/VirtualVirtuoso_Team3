@@ -120,8 +120,9 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
             <div className="DrumsPicture"></div>
         </div>
     {/* Instructions for how to play to the left of the instrument */}
-        <div style={{ position: 'absolute', top: '50%', left: '5%', transform: 'translateY(-50%)', color: 'black', fontSize: '1.2rem', textAlign: 'left' }}>
+        <div className="instructions-box">
 
+            <p className="instructions-title">How to Play</p>
             <p>Press the following keys to play the Drums:</p>
             <p>Space - Plays Kick</p>
             <p>A - Plays Closed Hi-Hat</p>

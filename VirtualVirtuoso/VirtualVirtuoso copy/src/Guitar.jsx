@@ -116,14 +116,15 @@ function Guitar({ mode, page, selectedInstrument, onBack }) {
             <div className="BassPicture"></div>
         </div>
 
-        <div style={{ position: 'absolute', top: '50%', left: '5%', transform: 'translateY(-50%)', color: 'black', fontSize: '1.2rem', textAlign: 'left' }}>
-
+          <div className="instructions-box">
+            <p className="instructions-title">How to Play</p>
             <p> Press the following keys to play the Guitar: </p>
             <p>2 - Plays G3</p>
             <p>W - Plays D3</p>
             <p>S - Plays A2</p>
             <p>X - Plays E2</p>
-        </div>
+            </div>
+
         </>
 
     )}

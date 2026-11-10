@@ -229,8 +229,10 @@ useEffect(() => {
         </div>
         </div>
 
-        <div style={{ position: 'absolute', top: '50%', left: '5%', transform: 'translateY(-50%)', color: 'black', fontSize: '1.2rem', textAlign: 'left' }}>
+        {/*Needs to be the same appearance across all user devices and their screen sizes */}
+        <div className="instructions-box">
 
+            <p className="instructions-title">How to Play</p>
             <p>Press the following keys to play the Piano:</p>
             <p>Z - Plays C3</p>
             <p>S - Plays C#3</p>
