@@ -47,7 +47,7 @@ function HowToPage({ onBack }) {
           <section className="instrument-section">
             <h2>Bass</h2>
             <p>
-              The open strings are on keys 1, Q, A, and Z.
+              The open strings are on keys 2, W, S, and X.
               The further right and up on the keyboard,
               the higher the pitch.
             </p>
