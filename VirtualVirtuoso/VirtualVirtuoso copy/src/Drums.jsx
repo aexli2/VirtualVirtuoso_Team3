@@ -1,3 +1,4 @@
+
 import './Drums.css';
 
 import { useState, useEffect } from 'react';
@@ -20,23 +21,25 @@ const soundMappingForDrums={
     floortom: new Audio(floortom),
     closedhihat: new Audio(closedhihat),
     kick: new Audio(kick)
-
-
-
 };
 
 
 function Drums({ mode, page, selectedInstrument, onBack }) {
 
-    
-   
+    // Freeplay keyboard functionality
     useEffect(() => {
+
+        // Only activate keyboard sounds in Freeplay mode
+        if (mode !== 'freeplay') {
+            return;
+        }
+
         function handleKeyDown(event) {
             // Helper function to stop active sound, reset, and play instantly on rapid re-press
             const playSound = (audio) => {//audio is the sound clip form the file it is being grabbed from
                 audio.pause();//This pauses the audio if it is already playing allowing it so that when the key is pressed again it won't overlap
                 audio.currentTime = 0;//This reset the audio for the sound clip of the file
-                
+
                 audio.play().catch((error) => console.log("Audio play blocked:", error));//This catches any errors produced for the sound file
             };
 
@@ -47,7 +50,7 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
                     break;
 
                 case 'c':
-                    playSound(soundMappingForDrums.snare); 
+                    playSound(soundMappingForDrums.snare);
                     console.log('User pressed C for Snare');
                     break;
 
@@ -75,7 +78,7 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
                     playSound(soundMappingForDrums.closedhihat);
                     console.log('User pressed A for Closed Hi-Hat');
                     break;
-                
+
                 case ' ':
                     event.preventDefault(); // Prevents page from scrolling down when pressing spacebar
                     playSound(soundMappingForDrums.kick);
@@ -94,50 +97,65 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [onBack]); // Re-run if onBack changes
+    }, [mode, onBack]); // Re-run if mode or onBack changes
 
 
-   return(
+    return(
 
- 
-   <> 
+        <>
 
-        <header className="drum-header">
-        <button
-          className="selection-back" /* back button */
-          type="button"
-          
-          onClick={onBack}
-        >
-          <span className="selection-arrow">⬅</span>
-          <div className="vbox">
-            <span>Instrument</span>
-            <span>Selection</span>
-          </div>
-        </button>
-        </header>
-        
-        
-        <div className="DrumsContainer">
-            <div className="DrumsPicture"></div>
-        </div>
-    {/* Instructions for how to play to the left of the instrument */}
-        <div className="instructions-box">
+            <header className="drum-header">
+                <button
+                    className="selection-back" /* back button */
+                    type="button"
 
-            <p className="instructions-title">How to Play</p>
-            <p>Press the following keys to play the Drums:</p>
-            <p>Space - Plays Kick</p>
-            <p>A - Plays Closed Hi-Hat</p>
-            <p>C - Plays Snare</p>
-            <p>E - Plays Crash</p>
-            <p>F - Plays High Tom</p>
-            <p>J - Plays Mid Tom</p>
-            <p>L - Plays Floor Tom</p>
-            <p>I - Plays Ride</p>
-        </div>
+                    onClick={onBack}
+                >
+                    <span className="selection-arrow">⬅</span>
+                    <div className="vbox">
+                        <span>Instrument</span>
+                        <span>Selection</span>
+                    </div>
+                </button>
+            </header>
+
+
+            {/* FREEPLAY MODE */}
+            {mode === 'freeplay' && (
+                <>
+                    <div className="DrumsContainer">
+                        <div className="DrumsPicture"></div>
+                    </div>
+
+                    {/* Instructions for how to play to the left of the instrument */}
+                    <div className="instructions-box">
+
+                        <p className="instructions-title">How to Play</p>
+                        <p>Press the following keys to play the Drums:</p>
+                        <p>Space - Plays Kick</p>
+                        <p>A - Plays Closed Hi-Hat</p>
+                        <p>C - Plays Snare</p>
+                        <p>E - Plays Crash</p>
+                        <p>F - Plays High Tom</p>
+                        <p>J - Plays Mid Tom</p>
+                        <p>L - Plays Floor Tom</p>
+                        <p>I - Plays Ride</p>
+                    </div>
+                </>
+            )}
+
+
+            {/* CHALLENGE MODE */}
+            {mode === 'challenge' && (
+                <div className="DrumsContainer challenge-mode">
+                    <div className="DrumsChallengePicture"></div>
+                </div>
+            )}
+
         </>
 
-    )}
+    );
 
+}
 
 export default Drums;
