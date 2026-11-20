@@ -94,9 +94,21 @@ function handleLevelSelect(level) {//This handles level selection for the level 
     );
   }
 
-  if (page === 'drums') {//to open the drums page
+ if (page === 'drums') {//to open the drums page
     return (
-      <Drums mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <Drums
+        mode={mode}
+        page={page}
+        selectedInstrument={selectedInstrument}
+        onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}}
+
+        currentScore={currentScore}
+        setCurrentScore={setCurrentScore}
+        multiplier={multiplier}
+        setMultiplier={setMultiplier}
+        drumHighScore={drumHighScore}
+        setDrumHighScore={setDrumHighScore}
+      />
     );
   }
 

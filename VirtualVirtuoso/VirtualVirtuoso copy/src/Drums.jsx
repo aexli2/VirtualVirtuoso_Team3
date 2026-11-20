@@ -24,7 +24,18 @@ const soundMappingForDrums={
 };
 
 
-function Drums({ mode, page, selectedInstrument, onBack }) {
+function Drums({
+    mode,
+    page,
+    selectedInstrument,
+    onBack,
+    currentScore,
+    setCurrentScore,
+    multiplier,
+    setMultiplier,
+    drumHighScore,
+    setDrumHighScore
+}) {
 
     // Freeplay keyboard functionality
     useEffect(() => {
@@ -148,7 +159,20 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
             {/* CHALLENGE MODE */}
             {mode === 'challenge' && (
                 <div className="DrumsContainer challenge-mode">
+
                     <div className="DrumsChallengePicture"></div>
+
+                    {/*Score Tracking Variables implemented here*/}
+                    <div className="DrumsScoreboard">
+
+                        <p>Score: {currentScore}</p>
+
+                        <p> HighScore: {drumHighScore}</p>
+
+                        <p>Multiplier: x{multiplier}</p>
+
+                    </div>
+
                 </div>
             )}
 
