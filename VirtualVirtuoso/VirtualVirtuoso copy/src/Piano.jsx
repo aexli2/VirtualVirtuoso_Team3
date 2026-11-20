@@ -4,21 +4,21 @@ import { useState, useEffect } from 'react';
 
 
 
-import C3 from './audio/Piano C3.mp3';
-import C_3 from './audio/Piano Cs3.mp3';
-import D3 from './audio/Piano D3.mp3';
-import E3 from './audio/Piano E3.mp3';
-import Eb3 from './audio/Piano Eb3.mp3';
-import F3 from './audio/Piano F3.mp3';
-import F_3 from './audio/Piano Fs3.mp3';
-import G3 from './audio/Piano G3.mp3';
-import G_3 from './audio/Piano Gs3.mp3';
-import A3 from './audio/Piano A3.mp3';
-import A_3 from './audio/Piano As3.mp3';
-import B3 from './audio/Piano B3.mp3';
-import C4 from './audio/Piano C4.mp3';
-import C_4 from './audio/Piano Cs4.mp3';
-import D4 from './audio/Piano D4.mp3';
+import C3 from './audio/Piano/Piano C3.mp3';
+import C_3 from './audio/Piano/Piano Cs3.mp3';
+import D3 from './audio/Piano/Piano D3.mp3';
+import E3 from './audio/Piano/Piano E3.mp3';
+import Eb3 from './audio/Piano/Piano Eb3.mp3';
+import F3 from './audio/Piano/Piano F3.mp3';
+import F_3 from './audio/Piano/Piano Fs3.mp3';
+import G3 from './audio/Piano/Piano G3.mp3';
+import G_3 from './audio/Piano/Piano Gs3.mp3';
+import A3 from './audio/Piano/Piano A3.mp3';
+import A_3 from './audio/Piano/Piano As3.mp3';
+import B3 from './audio/Piano/Piano B3.mp3';
+import C4 from './audio/Piano/Piano C4.mp3';
+import C_4 from './audio/Piano/Piano Cs4.mp3';
+import D4 from './audio/Piano/Piano D4.mp3';
 
 
 const soundMappingForPiano={

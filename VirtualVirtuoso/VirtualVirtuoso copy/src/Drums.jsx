@@ -2,14 +2,14 @@ import './Drums.css';
 
 import { useState, useEffect } from 'react';
 
-import crash from './audio/Drum Crash.mp3';
-import snare from './audio/Drum Snare.mp3';
-import ride from './audio/Drum Ride.mp3';
-import hightom from './audio/Drum High Tom.mp3';
-import midtom from './audio/Drum Mid Tom.mp3';
-import floortom from './audio/Drum Floor Tom.mp3';
-import closedhihat from './audio/Drum Closed Hi-Hat.mp3';
-import kick from './audio/Drum Kick.mp3';
+import crash from './audio/Drum/Drum Crash.mp3';
+import snare from './audio/Drum/Drum Snare.mp3';
+import ride from './audio/Drum/Drum Ride.mp3';
+import hightom from './audio/Drum/Drum High Tom.mp3';
+import midtom from './audio/Drum/Drum Mid Tom.mp3';
+import floortom from './audio/Drum/Drum Floor Tom.mp3';
+import closedhihat from './audio/Drum/Drum Closed Hi-Hat.mp3';
+import kick from './audio/Drum/Drum Kick.mp3';
 
 const soundMappingForDrums={
     crash: new Audio(crash),

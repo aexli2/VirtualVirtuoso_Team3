@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 
 
 
-import G3 from './audio/Bass G3.mp3';
-import D3 from './audio/Bass D3.mp3';
-import A2 from './audio/Bass A2.mp3';
-import E2 from './audio/Bass E2.mp3';
+import G3 from './audio/Bass/Bass G3.mp3';
+import D3 from './audio/Bass/Bass D3.mp3';
+import A2 from './audio/Bass/Bass A2.mp3';
+import E2 from './audio/Bass/Bass E2.mp3';
 
 
 const soundMappingForGuitar={
