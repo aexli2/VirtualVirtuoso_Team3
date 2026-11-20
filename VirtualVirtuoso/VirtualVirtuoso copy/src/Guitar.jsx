@@ -18,13 +18,13 @@ const soundMappingForGuitar={
 }
 
 function Guitar({ mode, page, selectedInstrument, onBack }) {
-    
+  
   useEffect(() => {
     
     function handleKeyDown(event) {//Different from drums, must only play while key is being held and stop when released
       const playSound = (audio) => {
         // audio.pause(); Removing because is caused audio buffer
-        // audio.currentTime=0;
+        audio.currentTime=0;
         audio.play().catch((error) => console.log("Audio play blocked:", error));
       };
 

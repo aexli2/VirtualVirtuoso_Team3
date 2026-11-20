@@ -10,8 +10,9 @@ function HowToPage({ onBack }) {
           onClick={onBack}
           aria-label="Back to Home"
         >
-          <span>Home</span>
+          
           <span className="back-arrow">⬅</span>
+          <span>Home</span>
         </button>
 
         <h1>VirtualVirtuoso</h1> 

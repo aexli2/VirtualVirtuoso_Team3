@@ -1,4 +1,3 @@
-
 /* main selection page */
 .selection-page {
   min-height: 100vh;
@@ -9,7 +8,8 @@
 
 /* green header */
 .selection-header {
-  height: 100px;
+  min-height: 100px;
+  padding: 15px 20px;
   background: #4fa836;
   border-bottom: 1px solid #2f6b22;
   display: flex;
@@ -22,8 +22,9 @@
 .selection-header h1 {
   margin: 0;
   font-family: 'Dancing Script', cursive;
-  font-size: 34px;
+  font-size: clamp(28px, 4vw, 34px);
   font-weight: 600;
+  text-align: center;
 }
 
 /* home button */
@@ -39,29 +40,31 @@
   border: none;
   color: black;
   font-family: 'Courier New', monospace;
-  font-size: 26px;
+  font-size: clamp(16px, 2vw, 26px);
   cursor: pointer;
+  z-index: 2;
 }
 
 /* home arrow */
 .selection-arrow {
-  font-size: 38px;
+  font-size: clamp(25px, 3vw, 38px);
   line-height: 1;
 }
 
+/*
 .selection-back:hover {
   opacity: 0.7;
-}
+}*/
 
 /* page content */
 .selection-content {
   padding: 30px 35px;
 }
 
-/* select instrument  */
+/* select instrument */
 .selection-content h2 {
   text-align: center;
-  font-size: 44px;
+  font-size: clamp(28px, 4vw, 44px);
   font-weight: normal;
   margin: 0;
 }
@@ -72,7 +75,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 35px;
   max-width: 1200px;
-  margin: 120px auto 0;
+  margin: 100px auto 0;
 }
 
 /* clickable instrument */
@@ -87,11 +90,13 @@
   color: black;
   font-family: 'Courier New', monospace;
   cursor: pointer;
+  min-width: 0;
 }
 
 /* instrument names */
 .instrument-name {
-  font-size: 32px;
+  font-size: clamp(22px, 3vw, 32px);
+  text-align: center;
 }
 
 /* image placeholders */
@@ -104,8 +109,6 @@
   border: 2px solid black;
 }
 
-
-
 .instrument-image-box-guitar {
   display: block;
   width: 100%;
@@ -113,7 +116,7 @@
   aspect-ratio: 1.24;
   /* assets/SelectGuitar.png is background and needs to be resized to fit the box */
   background: url('assets/SelectGuitar.png') no-repeat center;
-  background-size: contain;/*Resizes the image to fit in the box properly*/
+  background-size: contain; /* Resizes the image to fit in the box properly */
   border: 2px solid black;
 }
 
@@ -124,7 +127,7 @@
   aspect-ratio: 1.24;
   /* assets/SelectDrums.png is background and needs to be resized to fit the box */
   background: url('assets/SelectDrums.png') no-repeat center;
-  background-size: contain;/*Resizes the image to fit in the box properly*/
+  background-size: contain; /* Resizes the image to fit in the box properly */
   border: 2px solid black;
 }
 
@@ -135,12 +138,72 @@
   aspect-ratio: 1.24;
   /* assets/SelectPiano.png is background and needs to be resized to fit the box */
   background: url('assets/SelectPiano.png') no-repeat center;
-  background-size: contain;/*Resizes the image to fit in the box properly*/
+  background-size: contain; /* Resizes the image to fit in the box properly */
   border: 2px solid black;
 }
 
-/* hover effect */
-.instrument-option:hover .instrument-image-box {
-  background: #e6e6e6;
+/* 
+.instrument-option:hover .instrument-image-box,
+.instrument-option:hover .instrument-image-box-guitar,
+.instrument-option:hover .instrument-image-box-drums,
+.instrument-option:hover .instrument-image-box-piano {
+  background-color: #e6e6e6;
   border-color: #4fa836;
+}
+  */
+
+/* tablet layout */
+@media (max-width: 900px) {
+  .instrument-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px 25px;
+    margin-top: 65px;
+  }
+
+  .instrument-option:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* mobile layout */
+@media (max-width: 600px) {
+  .selection-header {
+    min-height: 85px;
+    padding: 15px 10px;
+  }
+
+  .selection-back {
+    left: 10px;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  .selection-arrow {
+    font-size: 23px;
+  }
+
+  .selection-header h1 {
+    font-size: 25px;
+  }
+
+  .selection-content {
+    padding: 25px 18px;
+  }
+
+  .instrument-options {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 40px;
+  }
+
+  .instrument-option:last-child {
+    grid-column: auto;
+  }
+
+  .instrument-image-box,
+  .instrument-image-box-guitar,
+  .instrument-image-box-drums,
+  .instrument-image-box-piano {
+    max-width: 320px;
+  }
 }

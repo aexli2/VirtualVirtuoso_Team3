@@ -1,4 +1,3 @@
-
 /* how-to page container */
 .howto-page {
   min-height: 100vh;
@@ -9,10 +8,10 @@
 
 /* green header */
 .howto-header {
-  height: 100px;
+  min-height: 100px;
+  padding: 15px 20px;
   background: #4fa836;
   border-bottom: 1px solid #2f6b22;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,9 +21,10 @@
 /* website title */
 .howto-header h1 {
   font-family: 'Dancing Script', cursive;
-  font-size: 34px;
+  font-size: clamp(28px, 4vw, 34px);
   font-weight: 600;
   margin: 0;
+  text-align: center;
 }
 
 /* home button */
@@ -33,11 +33,9 @@
   left: 30px;
   top: 50%;
   transform: translateY(-50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background: none;
   border: none;
   color: black;
@@ -47,6 +45,7 @@
   cursor: pointer;
 }
 
+/* home arrow */
 .back-arrow {
   font-size: 38px;
   line-height: 1;
@@ -66,8 +65,8 @@
 .howto-intro {
   max-width: 1100px;
   margin: 0 auto 75px;
-  font-size: 22px;
-  line-height: 1.3;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.5;
 }
 
 /* three-column instrument grid */
@@ -77,6 +76,8 @@
   border: 2px solid #333;
   border-radius: 8px;
   overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* each instrument sections */
@@ -93,13 +94,80 @@
 /* instrument titles */
 .instrument-section h2 {
   text-align: center;
-  font-size: 24px;
+  font-size: clamp(20px, 2.2vw, 24px);
   margin: 0 0 25px;
 }
 
 /* instrument descriptions */
 .instrument-section p {
-  font-size: 20px;
-  line-height: 1.4;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.5;
   margin: 0;
+}
+
+/* tablet layout */
+@media (max-width: 900px) {/*the pixel screen size helps dictate which device it is being made for*/
+  .howto-content {
+    padding: 35px 25px;
+  }
+
+  .howto-intro {
+    margin-bottom: 40px;
+  }
+
+  .instrument-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* horizontal dividers when sections are stacked */
+  .instrument-section:not(:last-child) {
+    border-right: none;
+    border-bottom: 2px solid #333;
+  }
+
+  .instrument-section {
+    padding: 25px;
+  }
+}
+
+/* mobile layout */
+@media (max-width: 600px) {
+  .howto-header {
+    min-height: 85px;
+    padding: 15px 10px;
+  }
+
+  .howto-header h1 {
+    font-size: 25px;
+  }
+
+  .home-back {
+    left: 10px;
+    font-size: 14px;
+  }
+
+  .back-arrow {
+    font-size: 25px;
+  }
+
+  .howto-content {
+    padding: 25px 16px;
+  }
+
+  .howto-intro {
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .instrument-section {
+    padding: 22px 18px;
+  }
+
+  .instrument-section h2 {
+    margin-bottom: 15px;
+  }
+
+  .instrument-section p {
+    font-size: 16px;
+  }
 }

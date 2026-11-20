@@ -1,42 +1,40 @@
-.PageBackground{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./assets/EmptyStagePhoto.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: -1; /* Ensures it stays behind all other content */
+/* stage background */
+body:has(.drum-header) {
+  min-height: 100vh;
+  background-image: url('./assets/EmptyStagePhoto.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-
+/* drums container */
 .DrumsContainer {
-    position: fixed;
-    bottom: 3vh; /* Scales distance from bottom based on screen height */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2vh; 
-    z-index: 10;
-    width: 100%;
-    max-width: 600px; /* Prevents it from getting too huge on large screens */
-    padding: 0 20px;
-    box-sizing: border-box;
+  position: fixed;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* drums picture */
 .DrumsPicture {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Keeps the container perfectly square and proportional */
-    max-height: 45vh; /* Ensures it never takes up more than 45% of the screen height */
-    background-image: url('./assets/Drums.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 45vh;
+  background-image: url('./assets/Drums.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
 
 /* home button */
 .selection-back {
@@ -51,28 +49,32 @@
   border: none;
   color: black;
   font-family: 'Courier New', monospace;
-  font-size: 26px;
+  font-size: clamp(16px, 2vw, 26px);
   cursor: pointer;
+  z-index: 3;
 }
 
+/* drums header */
 .drum-header {
-  height: 100px;
+  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 3;
 }
 
+/* back button text layout */
 .vbox {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
 }
 
 /* home arrow */
 .selection-arrow {
-  font-size: 38px;
+  font-size: clamp(25px, 3vw, 38px);
   line-height: 1;
 }
 
@@ -80,36 +82,96 @@
   opacity: 0.7;
 }
 
-
-
-
-
-
-
-
-
-
-
-
+/* instructions box */
 .instructions-box {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 20px 30px;
-    border-radius: 8px;
-    border: 2px solid black;
-    font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
-    color: black;
-    align-items: center;
-    left:10%;
-    position: absolute; left:0%; bottom:0%;
-  
-    text-align: left;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 10;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 18px 24px;
+  border-radius: 8px;
+  border: 2px solid black;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(13px, 1.2vw, 17px);
+  color: black;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 4;
+  max-width: 300px;
+  max-height: 75vh;
+  overflow-y: auto;
 }
 
+/* instructions title */
 .instructions-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+/* remove default paragraph spacing inside instructions */
+.instructions-box p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* tablet layout */
+@media (max-width: 900px) {
+  .DrumsContainer {
+    max-width: 480px;
+    bottom: 2vh;
+  }
+
+  .DrumsPicture {
+    max-height: 40vh;
+  }
+
+  .instructions-box {
+    left: 12px;
+    bottom: 12px;
+    max-width: 260px;
+    max-height: 45vh;
+  }
+}
+
+/* mobile layout */
+@media (max-width: 600px) {
+  .drum-header {
+    min-height: 75px;
+  }
+
+  .selection-back {
+    left: 10px;
+    gap: 5px;
+    font-size: 13px;
+  }
+
+  .selection-arrow {
+    font-size: 23px;
+  }
+
+  .DrumsContainer {
+    bottom: 2vh;
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  .DrumsPicture {
+    max-height: 32vh;
+  }
+
+  .instructions-box {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    max-width: none;
+    max-height: 38vh;
+    padding: 12px 15px;
+    font-size: 12px;
+  }
+
+  .instructions-title {
+    font-size: 15px;
+  }
 }
