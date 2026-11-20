@@ -28,6 +28,7 @@ const soundMappingForDrums={
 
 function Drums({ mode, page, selectedInstrument, onBack }) {
 
+
    
     useEffect(() => {
         function handleKeyDown(event) {
@@ -35,6 +36,7 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
             const playSound = (audio) => {//audio is the sound clip form the file it is being grabbed from
                 audio.pause();//This pauses the audio if it is already playing allowing it so that when the key is pressed again it won't overlap
                 audio.currentTime = 0;//This reset the audio for the sound clip of the file
+                
                 audio.play().catch((error) => console.log("Audio play blocked:", error));//This catches any errors produced for the sound file
             };
 
@@ -44,9 +46,9 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
                     console.log('User pressed E for Crash');
                     break;
 
-                case 's':
+                case 'c':
                     playSound(soundMappingForDrums.snare); 
-                    console.log('User pressed S for Snare');
+                    console.log('User pressed C for Snare');
                     break;
 
                 case 'i':
@@ -126,7 +128,7 @@ function Drums({ mode, page, selectedInstrument, onBack }) {
             <p>Press the following keys to play the Drums:</p>
             <p>Space - Plays Kick</p>
             <p>A - Plays Closed Hi-Hat</p>
-            <p>S - Plays Snare</p>
+            <p>C - Plays Snare</p>
             <p>E - Plays Crash</p>
             <p>F - Plays High Tom</p>
             <p>J - Plays Mid Tom</p>

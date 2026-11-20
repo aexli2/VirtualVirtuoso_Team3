@@ -1,3 +1,4 @@
+
 import './Guitar.css';
 
 import { useState, useEffect } from 'react';
@@ -20,12 +21,49 @@ const soundMappingForGuitar={
 function Guitar({ mode, page, selectedInstrument, onBack }) {
   
   useEffect(() => {
+
+    // Tracks the playback state of each individual key
+    const activeNotes = new Map();
     
     function handleKeyDown(event) {//Different from drums, must only play while key is being held and stop when released
+
+      // Prevents automatic keyboard repeat from restarting the audio
+      if (event.repeat) return;
+
       const playSound = (audio) => {
-        // audio.pause(); Removing because is caused audio buffer
-        audio.currentTime=0;
-        audio.play().catch((error) => console.log("Audio play blocked:", error));
+        const key = event.key.toLowerCase();
+
+        // Gets or creates the playback state for this note
+        let noteState = activeNotes.get(key);
+
+        if (!noteState) {
+          noteState = {
+            audio: audio,
+            startTime: 0,
+            released: false,
+            timer: null
+          };
+
+          activeNotes.set(key, noteState);
+        }
+
+        // Clears the previous timer if the same key is pressed again
+        if (noteState.timer !== null) {
+          clearTimeout(noteState.timer);
+          noteState.timer = null;
+        }
+
+        // Records the start time of this new press
+        noteState.startTime = Date.now();
+        noteState.released = false;
+
+        // Restarts the same audio instance instead of creating another
+        noteState.audio.pause();
+        noteState.audio.currentTime = 0;
+
+        noteState.audio.play().catch((error) =>
+          console.log("Audio play blocked:", error)
+        );
       };
 
       switch (event.key.toLowerCase()) {
@@ -56,9 +94,35 @@ function Guitar({ mode, page, selectedInstrument, onBack }) {
 
 
     function handleKeyUp(event) {//Hands when key is released, stops the sound from playing, vital towards functionality
+
       const stopSound = (audio) => {
-        audio.pause();
-        audio.currentTime=0;
+        const key = event.key.toLowerCase();
+        const noteState = activeNotes.get(key);
+
+        if (!noteState) return;
+
+        // Records that the key has been released
+        noteState.released = true;
+
+        // Calculates how much of the one-second minimum remains
+        const elapsedTime = Date.now() - noteState.startTime;
+        const remainingTime = Math.max(0, 1000 - elapsedTime);
+
+        // Stops immediately if the note has already played for one second
+        if (remainingTime === 0) {
+          noteState.audio.pause();
+          noteState.audio.currentTime = 0;
+          activeNotes.delete(key);
+        } else {
+          // Otherwise, waits until the one-second minimum is reached
+          noteState.timer = setTimeout(() => {
+            if (noteState.released && activeNotes.get(key) === noteState) {
+              noteState.audio.pause();
+              noteState.audio.currentTime = 0;
+              activeNotes.delete(key);
+            }
+          }, remainingTime);
+        }
       };
 
       switch (event.key.toLowerCase()) {
@@ -86,6 +150,18 @@ function Guitar({ mode, page, selectedInstrument, onBack }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+
+      // Clears timers and stops remaining audio when leaving the page
+      activeNotes.forEach((noteState) => {
+        if (noteState.timer !== null) {
+          clearTimeout(noteState.timer);
+        }
+        noteState.audio.volume=0;
+        noteState.audio.pause();
+        noteState.audio.currentTime = 0;
+      });
+
+      activeNotes.clear();
     };
   }, [onBack]);
   
