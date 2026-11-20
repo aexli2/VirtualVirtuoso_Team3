@@ -1,3 +1,4 @@
+
 import './Piano.css';
 
 import { useState, useEffect } from 'react';
@@ -43,11 +44,44 @@ function Piano({ mode, page, selectedInstrument, onBack }) {
   
   
 useEffect(() => {
+
+  // Keeps track of notes currently playing and their one-second timers
+  const activeNotes = new Map();
   
   function handleKeyDown(event) {//Different from drums, must only play while key is being held and stop when released
+
+    // Prevents keyboard auto-repeat from restarting the audio
+    if (event.repeat) return;
+
     const playSound = (audio) => {
-      // audio.pause(); Removing because is caused audio buffer
-      // audio.currentTime=0;
+
+      // Finds whether this note is already being tracked
+      let noteState = activeNotes.get(audio);
+
+      if (!noteState) {
+        noteState = {
+          startTime: 0,
+          released: false,
+          timer: null
+        };
+
+        activeNotes.set(audio, noteState);
+      }
+
+      // Clears the previous timer if the same note is pressed again
+      if (noteState.timer) {
+        clearTimeout(noteState.timer);
+        noteState.timer = null;
+      }
+
+      // Starts a new one-second playback period
+      noteState.startTime = Date.now();
+      noteState.released = false;
+
+      // Restarts the same audio instead of creating another instance
+      audio.pause();
+      audio.currentTime = 0;
+
       audio.play().catch((error) => console.log("Audio play blocked:", error));
     };
 
@@ -123,13 +157,31 @@ useEffect(() => {
 
 
   function handleKeyUp(event) {//Hands when key is released, stops the sound from playing, vital towards functionality
+
     const stopSound = (audio) => {
-      audio.pause();
-      try{
-        audio.currentTime = 0;
-      } catch (error) {
-        console.error("Error stopping audio:", error);
-      }
+
+      const noteState = activeNotes.get(audio);
+
+      if (!noteState) return;
+
+      noteState.released = true;
+
+      // Calculates how much time remains in the one-second requirement
+      const elapsedTime = Date.now() - noteState.startTime;
+      const remainingTime = Math.max(0, 1000 - elapsedTime);
+
+      // Stops the note after the remaining time has passed
+      noteState.timer = setTimeout(() => {
+        audio.pause();
+
+        try {
+          audio.currentTime = 0;
+        } catch (error) {
+          console.error("Error stopping audio:", error);
+        }
+
+        activeNotes.delete(audio);
+      }, remainingTime);
     };
 
     switch (event.key.toLowerCase()) {
@@ -191,6 +243,18 @@ useEffect(() => {
   return () => {
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keyup', handleKeyUp);
+
+    // Stops any remaining notes when leaving the Piano page
+    activeNotes.forEach((noteState, audio) => {
+      if (noteState.timer) {
+        clearTimeout(noteState.timer);
+      }
+
+      audio.pause();
+      audio.currentTime = 0;
+    });
+
+    activeNotes.clear();
   };
 }, [onBack]);
 
