@@ -232,3 +232,55 @@ body:has(.drum-header) {
 .DrumsScoreboard p {
     margin: 3px 0;
 }
+
+
+
+/*This is where the notes are displayed on the screen*/
+/* Falling notes overlay for Challenge Mode */
+.DrumsChallengePicture {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Transparent layer that holds the falling notes */
+.FallingNotesContainer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Individual falling notes */
+.FallingNote {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    transform: translate(-50%, -50%);
+}
+
+/* Hi-hat lane */
+.FallingNote.hihat {
+    left: 34%;
+    background-color: #e0b400;
+}
+
+/* Snare lane */
+.FallingNote.snare {
+    left: 50%;
+    background-color: #d9534f;
+}
+
+/* Kick lane */
+.FallingNote.kick {
+    left: 66%;
+    background-color: #2878c7;
+}

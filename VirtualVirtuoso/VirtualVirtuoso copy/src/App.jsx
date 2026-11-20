@@ -110,8 +110,9 @@ const startPrompt =
         <Drums
           mode={mode}
           page={page}
+          level={level}
           selectedInstrument={selectedInstrument}
-          onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}}
+          onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection'); setDrumHighScore(score);setScore(0); setMultiplier(1); setChallengeReady(false); }}
 
           currentScore={currentScore}
           setCurrentScore={setCurrentScore}
