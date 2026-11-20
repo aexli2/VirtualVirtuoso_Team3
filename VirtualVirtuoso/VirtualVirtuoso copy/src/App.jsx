@@ -112,7 +112,7 @@ const startPrompt =
           page={page}
           level={level}
           selectedInstrument={selectedInstrument}
-          onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection'); setDrumHighScore(score);setScore(0); setMultiplier(1); setChallengeReady(false); }}
+          onBack={() => { setCurrentScore(currentScore); setLevel(0); setSelectedInstrument(null); setPage('instrument-selection'); setDrumHighScore(currentScore); setCurrentScore(0); setMultiplier(1); setChallengeReady(false); }}
 
           currentScore={currentScore}
           setCurrentScore={setCurrentScore}

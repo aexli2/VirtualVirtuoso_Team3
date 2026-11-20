@@ -75,7 +75,7 @@ function createBillieJeanNotes() {
         if (beat % 4 === 0) {
             notes.push({
                 id: id++,
-                lane: 'S',
+                lane: 'Space',
                 hitTime: beat,
                 status: 'pending'
             });
@@ -134,15 +134,18 @@ function Drums({
 
         switch (lane) {
             case 'A':
-                audio = SoundMappingForDrumsChallenge.hihat;
+                //audio = SoundMappingForDrumsChallenge.hihat;
+                audio=soundMappingForDrums.closedhihat;
                 break;
 
             case 'C':
-                audio = SoundMappingForDrumsChallenge.snare;
+                //audio = SoundMappingForDrumsChallenge.snare;
+                audio=soundMappingForDrums.snare;
                 break;
 
-            case 'S':
-                audio = SoundMappingForDrumsChallenge.kick;
+            case 'Space':
+                //audio = SoundMappingForDrumsChallenge.kick;
+                audio=soundMappingForDrums.kick;
                 break;
 
             default:
@@ -155,6 +158,7 @@ function Drums({
         audio.play().catch((error) => {
             console.log("Challenge drum sound blocked:", error);
         });
+
     }
 
     // Check whether the player pressed the correct key at the correct time
@@ -438,7 +442,12 @@ function Drums({
                     className="selection-back" /* back button */
                     type="button"
 
-                    onClick={onBack}
+                    onClick={() => { 
+                        setCurrentScore(currentScore); 
+                        if (currentScore > drumHighScore) {
+                            setDrumHighScore(currentScore);
+                        }
+                        onBack(); }}
                 >
                     <span className="selection-arrow">⬅</span>
                     <div className="vbox">
@@ -510,7 +519,7 @@ function Drums({
                                 else if (note.lane === 'C') {
                                     noteClass = 'snare';
                                 }
-                                else if (note.lane === 'S') {
+                                else if (note.lane === 'Space') {
                                     noteClass = 'kick';
                                 }
 
