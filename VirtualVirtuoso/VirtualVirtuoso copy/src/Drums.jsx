@@ -34,7 +34,8 @@ function Drums({
     multiplier,
     setMultiplier,
     drumHighScore,
-    setDrumHighScore
+    setDrumHighScore,
+    challengeReady
 }) {
 
     // Freeplay keyboard functionality
@@ -109,6 +110,16 @@ function Drums({
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [mode, onBack]); // Re-run if mode or onBack changes
+
+    useEffect(() => {
+    if (mode !== 'challenge' || !challengeReady) return;
+
+    //TODO: start the level here (begin note timing, reset score, etc.)
+
+    return () => {
+        //TODO: stop the level here (clear timers)
+    };
+}, [mode, challengeReady]);
 
 
     return(

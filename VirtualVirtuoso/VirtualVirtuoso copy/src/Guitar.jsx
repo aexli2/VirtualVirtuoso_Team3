@@ -18,9 +18,11 @@ const soundMappingForGuitar={
   E2: new Audio(E2)
 }
 
-function Guitar({ mode, page, selectedInstrument, onBack }) {
+function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
   
   useEffect(() => {
+    //In challenge mode, ignore keys until the "press any key" prompt is dismissed
+    if (mode === 'challenge' && !challengeReady) return;
 
     // Tracks the playback state of each individual key
     const activeNotes = new Map();
@@ -163,7 +165,7 @@ function Guitar({ mode, page, selectedInstrument, onBack }) {
 
       activeNotes.clear();
     };
-  }, [onBack]);
+  }, [onBack, mode, challengeReady]);
   
   
   

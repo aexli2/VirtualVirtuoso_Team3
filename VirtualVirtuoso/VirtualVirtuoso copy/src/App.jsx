@@ -8,6 +8,7 @@ import Drums from './Drums';
 import Piano from './Piano';
 import Guitar from './Guitar';
 import LevelSelection from './LevelSelection';
+import PressAnyKey from './PressAnyKey';
 
 function App() {
   const [page, setPage] = useState('home');//keeps track of the current page 
@@ -28,6 +29,9 @@ function App() {
   //Used for tracking the difficulty level across all instruments
   const [level, setLevel] = useState(0);//keeps track of the current level for any instrument
   //useState(int) where the int is the level number, 0 = easy, 1 = medium, 2 = hard, 3 = expert
+
+  //Used to start the level in Challenge Mode when the user is ready to play
+  const [challengeReady, setChallengeReady] = useState(false);//false until the user presses a key after picking a level
 
   useEffect(() => {
     console.log('Current page: ' + page + ' | Current mode: ' + mode+' | Instrument: ' + selectedInstrument+' | Level: ' + level);
@@ -72,6 +76,7 @@ function handleInstrumentSelect(instrument) {//to handle the instrument selectio
 function handleLevelSelect(level) {//This handles level selection for the level seleciton page
     setLevel(level);
     console.log('Level selected: ' + level + ' | mode is currently: ' + mode + ' | instrument is currently: ' + selectedInstrument);
+    setChallengeReady(false); // show the prompt again every time a level is chosen
     setPage(selectedInstrument);//This will set the page into the selected instrument page
 }
 
@@ -94,33 +99,48 @@ function handleLevelSelect(level) {//This handles level selection for the level 
     );
   }
 
+const startPrompt =
+  mode === 'challenge' && !challengeReady
+    ? <PressAnyKey onContinue={() => setChallengeReady(true)} />
+    : null;
+
  if (page === 'drums') {//to open the drums page
     return (
-      <Drums
-        mode={mode}
-        page={page}
-        selectedInstrument={selectedInstrument}
-        onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}}
+      <>
+        <Drums
+          mode={mode}
+          page={page}
+          selectedInstrument={selectedInstrument}
+          onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}}
 
-        currentScore={currentScore}
-        setCurrentScore={setCurrentScore}
-        multiplier={multiplier}
-        setMultiplier={setMultiplier}
-        drumHighScore={drumHighScore}
-        setDrumHighScore={setDrumHighScore}
-      />
+          currentScore={currentScore}
+          setCurrentScore={setCurrentScore}
+          multiplier={multiplier}
+          setMultiplier={setMultiplier}
+          drumHighScore={drumHighScore}
+          setDrumHighScore={setDrumHighScore}
+          challengeReady={challengeReady}
+        />
+        {startPrompt}
+      </>
     );
   }
 
   if (page === 'piano') {//to open the piano page
     return (
-      <Piano mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <>
+        <Piano mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection');}} challengeReady={challengeReady}/>
+        {startPrompt}
+      </>
     );
   }
 
   if (page === 'guitar') {//to open the guitar page
     return (
-      <Guitar mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection')}} />
+      <>
+        <Guitar mode={mode} page={page} selectedInstrument={selectedInstrument} onBack={() =>{setLevel(0); setSelectedInstrument(null); setPage('instrument-selection');}} challengeReady={challengeReady}/>
+        {startPrompt}
+      </>
     );
   }
 

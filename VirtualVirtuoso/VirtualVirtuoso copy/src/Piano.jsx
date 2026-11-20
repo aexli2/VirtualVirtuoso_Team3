@@ -40,10 +40,11 @@ const soundMappingForPiano={
   D4: new Audio(D4),
 };
 
-function Piano({ mode, page, selectedInstrument, onBack }) {
-  
+function Piano({ mode, page, selectedInstrument, onBack, challengeReady }) {
   
 useEffect(() => {
+  //In challenge mode, ignore keys until the "press any key" prompt is dismissed
+  if (mode === 'challenge' && !challengeReady) return;
 
   // Keeps track of notes currently playing and their one-second timers
   const activeNotes = new Map();
@@ -256,7 +257,7 @@ useEffect(() => {
 
     activeNotes.clear();
   };
-}, [onBack]);
+}, [onBack, mode, challengeReady]);
 
 
   
