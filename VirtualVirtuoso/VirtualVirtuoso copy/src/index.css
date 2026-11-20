@@ -1,8 +1,9 @@
-
+/* Applies consistent sizing to all elements */
 * {
   box-sizing: border-box;
 }
 
+/* Removes default browser spacing and fills the screen */
 html,
 body,
 #root {
@@ -11,6 +12,13 @@ body,
   width: 100%;
 }
 
+/* Prevents the page from becoming too narrow */
 body {
   min-width: 320px;
+  overflow-x: hidden;
+}
+
+/* Keeps images from overflowing their containers */
+img {
+  max-width: 100%;
 }
