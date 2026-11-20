@@ -28,7 +28,7 @@ const soundMappingForDrums={
 
 function Drums({ mode, page, selectedInstrument, onBack }) {
 
-
+    
    
     useEffect(() => {
         function handleKeyDown(event) {
