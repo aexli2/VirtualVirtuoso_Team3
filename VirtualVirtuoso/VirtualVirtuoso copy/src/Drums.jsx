@@ -3,6 +3,8 @@ import './Drums.css';
 
 import { useState, useEffect } from 'react';
 
+
+//For FreePlay mode
 import crash from './audio/Drum/Drum Crash.mp3';
 import snare from './audio/Drum/Drum Snare.mp3';
 import ride from './audio/Drum/Drum Ride.mp3';
@@ -11,6 +13,12 @@ import midtom from './audio/Drum/Drum Mid Tom.mp3';
 import floortom from './audio/Drum/Drum Floor Tom.mp3';
 import closedhihat from './audio/Drum/Drum Closed Hi-Hat.mp3';
 import kick from './audio/Drum/Drum Kick.mp3';
+
+//For Challenge Mode
+import ChallengebackTrack from './audio/ChallengeMode/Billie Jean drum backing track.mp3'
+import Challengehihat from './audio/ChallengeMode/Billie Jean hi-hat.mp3'
+import Challengekick from './audio/ChallengeMode/Billie Jean kick.mp3'
+import Challengesnare from './audio/ChallengeMode/Billie Jean snare.mp3'
 
 const soundMappingForDrums={
     crash: new Audio(crash),
@@ -21,6 +29,14 @@ const soundMappingForDrums={
     floortom: new Audio(floortom),
     closedhihat: new Audio(closedhihat),
     kick: new Audio(kick)
+};
+
+const SoundMappingForDrumsChallenge={
+
+    backTrack: new Audio(ChallengebackTrack),
+    hihat: new Audio(Challengehihat),
+    kick: new Audio(Challengekick),
+    snare: new Audio(Challengesnare)
 };
 
 
@@ -111,15 +127,33 @@ function Drums({
         };
     }, [mode, onBack]); // Re-run if mode or onBack changes
 
-    useEffect(() => {
-    if (mode !== 'challenge' || !challengeReady) return;
 
-    //TODO: start the level here (begin note timing, reset score, etc.)
 
+    //This is the Challenge Mode Game Logic 
+
+   useEffect(() => {
+    
+    // Only play music when Challenge Mode is active and the challenge is ready
+    if (mode !== 'challenge' || !challengeReady) {
+        return;
+    }
+
+    const backTrack = SoundMappingForDrumsChallenge.backTrack;
+
+    // Start the challenge backing track
+    backTrack.currentTime = 0;
+
+    backTrack.play().catch((error) => {
+        console.log("Challenge music playback blocked:", error);
+    });
+
+    // Stop the backing track when leaving Challenge Mode or ending the challenge
     return () => {
-        //TODO: stop the level here (clear timers)
+        backTrack.pause();
+        backTrack.currentTime = 0;
     };
-}, [mode, challengeReady]);
+
+    }, [mode, challengeReady]);
 
 
     return(

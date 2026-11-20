@@ -100,7 +100,7 @@ function handleLevelSelect(level) {//This handles level selection for the level 
   }
 
 const startPrompt =
-  mode === 'challenge' && !challengeReady
+  mode === 'challenge' && !challengeReady//Used for the "Press Any Key to Start" prompt in Challenge Mode
     ? <PressAnyKey onContinue={() => setChallengeReady(true)} />
     : null;
 
