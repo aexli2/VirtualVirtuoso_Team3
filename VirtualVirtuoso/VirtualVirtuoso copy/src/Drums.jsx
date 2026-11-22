@@ -52,7 +52,7 @@ const SoundMappingForDrumsChallenge={
 const TRACK_DURATION = 34;
 const BEAT_INTERVAL = 1; // 117 BPM converted to seconds per beat
 const FALL_DURATION = 2;
-const HIT_WINDOW = 0.40;//Determines how big the window is for the window to it for each note
+const HIT_WINDOW = 0.20;//Determines how big the window is for the window to it for each note
 const HIT_LINE_PERCENT = 90;//When the user pressed the key, it changes how big the line is for it to be hit
 
 // Generate the repeating Billie Jean drum pattern
@@ -191,11 +191,16 @@ function Drums({
             setCurrentScore((previousScore) => {
                 return previousScore + (100 * multiplier);
             });
+            setMultiplier((previousMultiplier) => {
+                return previousMultiplier + .5;
+            });
+            
 
             console.log(`Successful ${lane} hit!`);
 
         } else {
             console.log(`Missed ${lane} note`);
+            setMultiplier(1); // Reset multiplier on miss
         }
     }
 
@@ -388,8 +393,7 @@ function Drums({
                     note.status = 'missed';
                     notesChanged = true;
 
-                    // Reset multiplier when a note is missed
-                    setMultiplier(1);
+        
                 }
 
             });
