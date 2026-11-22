@@ -18,6 +18,13 @@ import floortom from './audio/Drum/Drum Floor Tom.mp3';
 import closedhihat from './audio/Drum/Drum Closed Hi-Hat.mp3';
 import kick from './audio/Drum/Drum Kick.mp3';
 
+
+
+
+//Metronomes for Freeplay Mode
+import multiMetronome from './audio/Metronome/MultiMetronome.mp3';
+import secMetronome from './audio/Metronome/OneSecMetronome.mp3';
+
 //For Challenge Mode
 import ChallengebackTrack1 from './audio/ChallengeMode/Billie Jean drum backing track.mp3'
 import Challengehihat1 from './audio/ChallengeMode/Billie Jean hi-hat.mp3'
@@ -34,6 +41,11 @@ const soundMappingForDrums={
     closedhihat: new Audio(closedhihat),
     kick: new Audio(kick)
 };
+
+const metronomeMapping={
+    oneSecMetro: new Audio(secMetronome),
+    multiMetro: new Audio(multiMetronome)
+}
 
 const SoundMappingForDrumsChallenge={
 
