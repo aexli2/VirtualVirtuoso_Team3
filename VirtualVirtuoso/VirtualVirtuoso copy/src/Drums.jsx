@@ -559,7 +559,7 @@ function Drums({
                     <div className="DrumsPicture"></div>
                 </div>
 
-                
+
                     {/* Freeplay Metronome Controls */}
                 <div className="metronome-controls">
 
