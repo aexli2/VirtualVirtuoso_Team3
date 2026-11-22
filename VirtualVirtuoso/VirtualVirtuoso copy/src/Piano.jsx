@@ -22,6 +22,12 @@ import C_4 from './audio/Piano/Piano Cs4.mp3';
 import D4 from './audio/Piano/Piano D4.mp3';
 
 
+
+// Metronomes for Freeplay Mode
+import multiMetronome from './audio/Metronome/MultiMetronome.mp3';
+import secMetronome from './audio/Metronome/OneSecMetronome.mp3';
+
+
 const soundMappingForPiano={
   C3: new Audio(C3),
   C_3: new Audio(C_3),
@@ -40,11 +46,27 @@ const soundMappingForPiano={
   D4: new Audio(D4),
 };
 
+
+
+const metronomeMapping={
+  oneSecMetro: new Audio(secMetronome),
+  multiMetro: new Audio(multiMetronome)
+};
+
+
+
+
 function Piano({ mode, page, selectedInstrument, onBack, challengeReady }) {
+  //For  Metronome in Freeplay Mode
+  const [oneSecMetronomeOn, setOneSecMetronomeOn] = useState(false);
+  const [multiMetronomeOn, setMultiMetronomeOn] = useState(false);  
   
 useEffect(() => {
   //In challenge mode, ignore keys until the "press any key" prompt is dismissed
   if (mode === 'challenge' && !challengeReady) return;
+
+
+   
 
   // Keeps track of notes currently playing and their one-second timers
   const activeNotes = new Map();
@@ -147,6 +169,19 @@ useEffect(() => {
       case '.':
         playSound(soundMappingForPiano.D4);
         console.log('User pressed . for D4');
+        break;
+
+      //Metronome controls
+      case '&': // Shift + 7 toggles the One Second Metronome
+        if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+          setOneSecMetronomeOn((previousState) => !previousState);
+        }
+        break;
+
+      case '*': // Shift + 8 toggles the Multi Metronome
+        if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+          setMultiMetronomeOn((previousState) => !previousState);
+        }
         break;
       
       
@@ -260,6 +295,64 @@ useEffect(() => {
 }, [onBack, mode, challengeReady]);
 
 
+// One-Second Metronome Playback
+useEffect(() => {
+
+    const audio = metronomeMapping.oneSecMetro;
+
+    if (mode === 'freeplay' && oneSecMetronomeOn) {
+
+        audio.loop = true;
+        audio.currentTime = 0;
+
+        audio.play().catch((error) => {
+            console.log("One Second Metronome playback blocked:", error);
+        });
+
+    } else {
+
+        audio.pause();
+        audio.currentTime = 0;
+
+    }
+
+    return () => {
+        audio.pause();
+        audio.currentTime = 0;
+    };
+
+}, [mode, oneSecMetronomeOn]);
+
+
+// Multi Metronome Playback
+useEffect(() => {
+
+    const audio = metronomeMapping.multiMetro;
+
+    if (mode === 'freeplay' && multiMetronomeOn) {
+
+        audio.loop = true;
+        audio.currentTime = 0;
+
+        audio.play().catch((error) => {
+            console.log("Multi Metronome playback blocked:", error);
+        });
+
+    } else {
+
+        audio.pause();
+        audio.currentTime = 0;
+
+    }
+
+    return () => {
+        audio.pause();
+        audio.currentTime = 0;
+    };
+
+}, [mode, multiMetronomeOn]);
+
+
   
   
   
@@ -292,6 +385,29 @@ useEffect(() => {
         <div className="PianoContainer">
             <div className="PianoPicture"></div>
         </div>
+        </div>
+        <div className="metronome-controls">
+
+            <button
+              type="button"
+              className={`metronome-button ${oneSecMetronomeOn ? 'active' : ''}`}
+              aria-pressed={oneSecMetronomeOn}
+              onClick={() => setOneSecMetronomeOn((previousState) => !previousState)}
+            >
+              One-Second Metronome
+              <span>Shift + 7 (&amp;)</span>
+            </button>
+
+            <button
+              type="button"
+              className={`metronome-button ${multiMetronomeOn ? 'active' : ''}`}
+              aria-pressed={multiMetronomeOn}
+              onClick={() => setMultiMetronomeOn((previousState) => !previousState)}
+            >
+              Multi Metronome
+              <span>Shift + 8 (*)</span>
+          </button>
+
         </div>
 
         {/*Needs to be the same appearance across all user devices and their screen sizes */}

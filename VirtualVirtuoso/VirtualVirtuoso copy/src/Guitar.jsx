@@ -4,11 +4,19 @@ import './Guitar.css';
 import { useState, useEffect } from 'react';
 
 
-
+//For Freeplay Mode
 import G3 from './audio/Bass/Bass G3.mp3';
 import D3 from './audio/Bass/Bass D3.mp3';
 import A2 from './audio/Bass/Bass A2.mp3';
 import E2 from './audio/Bass/Bass E2.mp3';
+
+
+
+//For Metronome for Freeplay Mode
+import multiMetronome from './audio/Metronome/MultiMetronome.mp3';
+import secMetronome from './audio/Metronome/OneSecMetronome.mp3';
+
+//For Challenge Mode
 
 
 const soundMappingForGuitar={
@@ -18,11 +26,26 @@ const soundMappingForGuitar={
   E2: new Audio(E2)
 }
 
+const metronomeMapping={
+  oneSecMetro: new Audio(secMetronome),
+  multiMetro: new Audio(multiMetronome)
+};
+
+
+
+
+
+
 function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
+    //For  Metronome in Freeplay Mode
+  const [oneSecMetronomeOn, setOneSecMetronomeOn] = useState(false);
+  const [multiMetronomeOn, setMultiMetronomeOn] = useState(false);  
   
   useEffect(() => {
     //In challenge mode, ignore keys until the "press any key" prompt is dismissed
     if (mode === 'challenge' && !challengeReady) return;
+
+
 
     // Tracks the playback state of each individual key
     const activeNotes = new Map();
@@ -88,6 +111,18 @@ function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
           playSound(soundMappingForGuitar.E2);
           console.log('User pressed X for E2');
           break;
+
+        case '&': // Shift + 7 toggles the One Second Metronome
+          if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+            setOneSecMetronomeOn((previousState) => !previousState);
+          }
+          break;
+
+        case '*': // Shift + 8 toggles the Multi Metronome
+          if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+            setMultiMetronomeOn((previousState) => !previousState);
+          }
+          break;
         
         default:
           break;
@@ -145,6 +180,7 @@ function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
       }
     }
 
+    
     //window is in reference to the entire window of the browser application
     window.addEventListener('keydown', handleKeyDown);//keydown event listener for when key is pressed down
     window.addEventListener('keyup', handleKeyUp);//keyup event listener for when key is released
@@ -166,6 +202,64 @@ function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
       activeNotes.clear();
     };
   }, [onBack, mode, challengeReady]);
+
+
+// One-Second Metronome Playback
+  useEffect(() => {
+
+      const audio = metronomeMapping.oneSecMetro;
+
+      if (mode === 'freeplay' && oneSecMetronomeOn) {
+
+          audio.loop = true;
+          audio.currentTime = 0;
+
+          audio.play().catch((error) => {
+              console.log("One-Second Metronome playback blocked:", error);
+          });
+
+      } else {
+
+          audio.pause();
+          audio.currentTime = 0;
+
+      }
+
+      return () => {
+          audio.pause();
+          audio.currentTime = 0;
+      };
+
+  }, [mode, oneSecMetronomeOn]);
+
+  
+  // Multi Metronome Playback
+  useEffect(() => {
+  
+      const audio = metronomeMapping.multiMetro;
+  
+      if (mode === 'freeplay' && multiMetronomeOn) {
+  
+          audio.loop = true;
+          audio.currentTime = 0;
+  
+          audio.play().catch((error) => {
+              console.log("Multi Metronome playback blocked:", error);
+          });
+  
+      } else {
+  
+          audio.pause();
+          audio.currentTime = 0;
+  
+      }
+  
+      return () => {
+          audio.pause();
+          audio.currentTime = 0;
+      };
+  
+  }, [mode, multiMetronomeOn]);
   
   
   
@@ -192,6 +286,30 @@ function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
         
         <div className="BassContainer">
             <div className="BassPicture"></div>
+        </div>
+        {/* Freeplay Metronome Controls */}
+        <div className="metronome-controls">
+
+            <button
+              type="button"
+              className={`metronome-button ${oneSecMetronomeOn ? 'active' : ''}`}
+              aria-pressed={oneSecMetronomeOn}
+              onClick={() => setOneSecMetronomeOn((previousState) => !previousState)}
+            >
+              One-Second Metronome
+              <span>Shift + 7 (&amp;)</span>
+            </button>
+
+            <button
+              type="button"
+              className={`metronome-button ${multiMetronomeOn ? 'active' : ''}`}
+              aria-pressed={multiMetronomeOn}
+              onClick={() => setMultiMetronomeOn((previousState) => !previousState)}
+            >
+              Multi Metronome
+              <span>Shift + 8 (*)</span>
+          </button>
+
         </div>
 
           <div className="instructions-box">
