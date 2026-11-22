@@ -38,6 +38,16 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+/* Toggleable piano picture */
+.ToggleablePianoPicture {
+   width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 45vh;
+  background-image: url('./assets/PianoToggleable.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 /* home button */
 .selection-back {

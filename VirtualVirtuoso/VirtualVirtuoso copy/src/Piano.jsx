@@ -59,7 +59,9 @@ const metronomeMapping={
 function Piano({ mode, page, selectedInstrument, onBack, challengeReady }) {
   //For  Metronome in Freeplay Mode
   const [oneSecMetronomeOn, setOneSecMetronomeOn] = useState(false);
-  const [multiMetronomeOn, setMultiMetronomeOn] = useState(false);  
+  const [multiMetronomeOn, setMultiMetronomeOn] = useState(false);
+  // Toggle between the regular piano and toggleable piano picture
+  const [toggleablePianoOn, setToggleablePianoOn] = useState(false);
   
 useEffect(() => {
   //In challenge mode, ignore keys until the "press any key" prompt is dismissed
@@ -75,6 +77,16 @@ useEffect(() => {
 
     // Prevents keyboard auto-repeat from restarting the audio
     if (event.repeat) return;
+    // Shift + 6 toggles the piano picture in Freeplay
+    if (event.code === 'Digit6' && event.shiftKey && mode === 'freeplay') {
+      event.preventDefault();
+
+      setToggleablePianoOn((previousState) => !previousState);
+
+      console.log("Toggleable Piano switched:", !toggleablePianoOn);
+
+      return;
+    }
 
     const playSound = (audio) => {
 
@@ -190,6 +202,7 @@ useEffect(() => {
         break;
     }
   }
+  
 
 
   function handleKeyUp(event) {//Hands when key is released, stops the sound from playing, vital towards functionality
@@ -383,7 +396,9 @@ useEffect(() => {
         
         
         <div className="PianoContainer">
-            <div className="PianoPicture"></div>
+          <div
+            className={toggleablePianoOn ? "PianoPicture ToggleablePianoPicture": "PianoPicture"}
+        ></div>
         </div>
         </div>
         <div className="metronome-controls">
@@ -414,6 +429,7 @@ useEffect(() => {
         <div className="instructions-box">
 
             <p className="instructions-title">How to Play</p>
+            <p>Press [Shift+6] to Switch Piano Layout</p>
             <p>Press the following keys to play the Piano:</p>
             <p>Z - Plays C3</p>
             <p>S - Plays C#3</p>
