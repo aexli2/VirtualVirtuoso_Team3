@@ -287,3 +287,68 @@ body:has(.drum-header) {
     left: 50%;
     background-color: #2878c7;
 }
+
+
+
+
+
+
+/*Metronome Stuff*/
+.metronome-controls {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 5;
+}
+
+.metronome-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  color: black;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.metronome-button span {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.metronome-button:hover {
+  background: #e8e8e8;
+}
+
+.metronome-button.active {
+  background: #2878c7;
+  color: white;
+  border-color: #174b7d;
+}
+
+@media (max-width: 600px) {
+  .metronome-controls {
+    top: 82px;
+    right: 10px;
+    gap: 6px;
+  }
+
+  .metronome-button {
+    padding: 8px 9px;
+    font-size: 11px;
+  }
+
+  .metronome-button span {
+    font-size: 10px;
+  }
+}

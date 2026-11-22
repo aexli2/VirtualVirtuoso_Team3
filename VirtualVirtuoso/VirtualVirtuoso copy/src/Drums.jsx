@@ -134,6 +134,18 @@ function Drums({
 
     const [songTime, setSongTime] = useState(-FALL_DURATION);
 
+
+    // Freeplay metronome toggle state
+    const [oneSecMetronomeOn, setOneSecMetronomeOn] = useState(false);
+    const [multiMetronomeOn, setMultiMetronomeOn] = useState(false);
+
+    // Turn off both metronomes when leaving Freeplay Mode
+    useEffect(() => {
+        if (mode !== 'freeplay') {
+            setOneSecMetronomeOn(false);
+            setMultiMetronomeOn(false);
+        }}, [mode]);
+
     // References used to access the latest game state
     const notesRef = useRef(notes);
     const songTimeRef = useRef(-FALL_DURATION);
@@ -215,6 +227,59 @@ function Drums({
             setMultiplier(1); // Reset multiplier on miss
         }
     }
+
+
+
+
+
+
+    // Play or stop the One Second Metronome in Freeplay
+    useEffect(() => {
+        const audio = metronomeMapping.oneSecMetro;
+
+        if (mode === 'freeplay' && oneSecMetronomeOn) {
+            audio.loop = true;
+            audio.currentTime = 0;
+            console.log("One Second Metronome is playing");
+
+            audio.play().catch((error) => {
+                console.log("One Second Metronome playback blocked:", error);
+            });
+        } else {
+            console.log("One Second Metronome is stopped");
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        return () => {
+            audio.pause();
+            audio.currentTime = 0;
+        };
+    }, [mode, oneSecMetronomeOn]);
+
+    // Play or stop the Multi Metronome in Freeplay
+    useEffect(() => {
+        const audio = metronomeMapping.multiMetro;
+
+        if (mode === 'freeplay' && multiMetronomeOn) {
+            console.log("Multi Metronome is playing");
+            audio.loop = true;
+            audio.currentTime = 0;
+
+            audio.play().catch((error) => {
+                console.log("Multi Metronome playback blocked:", error);
+            });
+        } else {
+            console.log("Multi Metronome is stopped");
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        return () => {
+            audio.pause();
+            audio.currentTime = 0;
+        };
+    }, [mode, multiMetronomeOn]);
 
     // Freeplay keyboard functionality
     useEffect(() => {
@@ -310,6 +375,19 @@ function Drums({
                          if (!event.repeat) {
                             handleChallengeHit('Space');
                         }
+                    }
+                    break;
+
+
+                case '&': 
+                    if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+                        setOneSecMetronomeOn((previousState) => !previousState);
+                    }
+                    break;
+
+                case '*': 
+                    if (mode === 'freeplay' && event.shiftKey && !event.repeat) {
+                        setMultiMetronomeOn((previousState) => !previousState);
                     }
                     break;
 
@@ -476,10 +554,36 @@ function Drums({
 
             {/* FREEPLAY MODE */}
             {mode === 'freeplay' && (
-                <>
-                    <div className="DrumsContainer">
-                        <div className="DrumsPicture"></div>
-                    </div>
+            <>
+                <div className="DrumsContainer">
+                    <div className="DrumsPicture"></div>
+                </div>
+
+                
+                    {/* Freeplay Metronome Controls */}
+                <div className="metronome-controls">
+
+                    <button
+                        type="button"
+                        className={`metronome-button ${oneSecMetronomeOn ? 'active' : ''}`}
+                        aria-pressed={oneSecMetronomeOn}
+                        onClick={() => setOneSecMetronomeOn((previousState) => !previousState)}
+                    >
+                        One-Second Metronome
+                        <span>Shift + 7 (&amp;)</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        className={`metronome-button ${multiMetronomeOn ? 'active' : ''}`}
+                        aria-pressed={multiMetronomeOn}
+                        onClick={() => setMultiMetronomeOn((previousState) => !previousState)}
+                    >
+                        Multi Metronome
+                        <span>Shift + 8 (*)</span>
+                    </button>
+
+                </div>
 
                     {/* Instructions for how to play to the left of the instrument */}
                     <div className="instructions-box">
