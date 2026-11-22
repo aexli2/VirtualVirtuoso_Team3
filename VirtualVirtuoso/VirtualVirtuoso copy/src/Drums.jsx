@@ -50,7 +50,7 @@ const SoundMappingForDrumsChallenge={
 //Stuff for Billie Jean Challenge Mode
 // Challenge Mode timing settings
 const TRACK_DURATION = 34;
-const BEAT_INTERVAL = 1;
+const BEAT_INTERVAL = 1; // 117 BPM converted to seconds per beat
 const FALL_DURATION = 2;
 const HIT_WINDOW = 0.40;//Determines how big the window is for the window to it for each note
 const HIT_LINE_PERCENT = 90;//When the user pressed the key, it changes how big the line is for it to be hit
@@ -291,7 +291,7 @@ function Drums({
                         console.log('User pressed SPACE for Drum Kick');}
                     else if (mode==='challenge' && challengeReady){
                          if (!event.repeat) {
-                            handleChallengeHit('S');
+                            handleChallengeHit('Space');
                         }
                     }
                     break;

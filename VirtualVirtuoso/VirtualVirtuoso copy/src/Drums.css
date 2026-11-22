@@ -212,7 +212,7 @@ body:has(.drum-header) {
     position: absolute;
 
     top: 55px;
-    right: 250px;
+    right: 220px;
 
     z-index: 2;
 
@@ -245,7 +245,10 @@ body:has(.drum-header) {
 /* Transparent layer that holds the falling notes */
 .FallingNotesContainer {
     position: absolute;
-    inset: 0;
+    top: 7.2%;
+    left: 25.5%;
+    width: 50%;
+    height: 42.5%;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
@@ -269,18 +272,18 @@ body:has(.drum-header) {
 
 /* Hi-hat lane */
 .FallingNote.hihat {
-    left: 34%;
+    left: 18%;
     background-color: #e0b400;
 }
 
 /* Snare lane */
 .FallingNote.snare {
-    left: 50%;
+    left: 33%;
     background-color: #d9534f;
 }
 
 /* Kick lane */
 .FallingNote.kick {
-    left: 66%;
+    left: 50%;
     background-color: #2878c7;
 }
