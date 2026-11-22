@@ -538,10 +538,14 @@ function Drums({
 
                     onClick={() => { 
                         setCurrentScore(currentScore); 
+
                         if (currentScore > drumHighScore) {
                             setDrumHighScore(currentScore);
+                            localStorage.setItem('drumsHighScore', currentScore);
                         }
-                        onBack(); }}
+
+                        onBack();
+                     }}
                 >
                     <span className="selection-arrow">⬅</span>
                     <div className="vbox">

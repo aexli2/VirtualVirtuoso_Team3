@@ -21,9 +21,15 @@ function App() {
   //These variables are tracking the score across every instrument
   const [currentScore, setCurrentScore] = useState(0);//keeps track of the current score for any instrument
   const [multiplier, setMultiplier] = useState(1);//keeps track of the current multiplier for any instrument
-  const [drumHighScore, setDrumHighScore] = useState(0);//keeps track of the high score for drums
-  const [pianoHighScore, setPianoHighScore] = useState(0);//keeps track of the high score for piano
-  const [guitarHighScore, setGuitarHighScore] = useState(0);//keeps track of the high score for guitar
+  const [drumHighScore, setDrumHighScore] = useState(() => {
+      return Number(localStorage.getItem('drumsHighScore')) || 0;
+  });
+  const [pianoHighScore, setPianoHighScore] = useState(() => {
+      return Number(localStorage.getItem('pianoHighScore')) || 0;
+  });
+  const [guitarHighScore, setGuitarHighScore] = useState(() => {
+      return Number(localStorage.getItem('guitarHighScore')) || 0;
+  });
 
 
   //Used for tracking the difficulty level across all instruments
