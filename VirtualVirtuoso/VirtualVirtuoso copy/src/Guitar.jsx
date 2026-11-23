@@ -267,7 +267,8 @@ function Guitar({ mode, page, selectedInstrument, onBack, challengeReady }) {
 
  
    <> 
-
+        {/* Stage Background */}
+        <div className="PageBackground"></div>
         <header className="Bass-header">
         <button
           className="selection-back" /* back button */

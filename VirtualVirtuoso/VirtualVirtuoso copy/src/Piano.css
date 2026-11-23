@@ -1,16 +1,16 @@
+
 /* stage background */
 .PageBackground {
   position: fixed;
   inset: 0;
   width: 100%;
   min-height: 100vh;
-  background-image: url('./assets/EmptyStagePhoto.jpg');
+  background-image: url('./assets/EmptyStagePhoto.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
 }
-
 /* piano container */
 .PianoContainer {
   position: fixed;
@@ -37,16 +37,18 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
 }
 /* Toggleable piano picture */
 .ToggleablePianoPicture {
    width: 100%;
   aspect-ratio: 1 / 1;
   max-height: 45vh;
-  background-image: url('./assets/PianoToggleable.jpg');
+  background-image: url('./assets/PianoToggleable.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
 }
 
 /* home button */
@@ -97,7 +99,7 @@
 
 /* instructions box */
 .instructions-box {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255);
   padding: 18px 24px;
   border-radius: 8px;
   border: 2px solid black;
@@ -214,7 +216,7 @@
   padding: 10px 14px;
   border: 2px solid black;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255);
   color: black;
   font-family: 'Courier New', monospace;
   font-size: 14px;

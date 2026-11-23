@@ -529,8 +529,10 @@ function Drums({
 
     return(
 
-        <>
-
+        <>  {mode === 'freeplay' && (
+            <div className="PageBackground"></div>
+        )}
+            
             <header className="drum-header">
                 <button
                     className="selection-back" /* back button */

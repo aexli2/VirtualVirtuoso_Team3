@@ -377,7 +377,8 @@ useEffect(() => {
 
  
    <> 
-        <div className="PageBackground">
+        {/* Stage Background */}
+        <div className="PageBackground"></div>
         
         <header className="Piano-header">
         <button
@@ -400,7 +401,7 @@ useEffect(() => {
             className={toggleablePianoOn ? "PianoPicture ToggleablePianoPicture": "PianoPicture"}
         ></div>
         </div>
-        </div>
+       
         <div className="metronome-controls">
 
             <button
